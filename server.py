@@ -12,7 +12,6 @@ async def handler(websocket):
             print("Data diterima dari scraper:")
             print(message)
 
-            # broadcast ke semua client
             for client in clients:
                 await client.send(message)
 

@@ -3,7 +3,7 @@ import os
 
 DATA_FILE = "data.json"
 
-# Inisialisasi file
+
 if not os.path.exists(DATA_FILE):
     with open(DATA_FILE, "w") as f:
         json.dump([], f)
@@ -32,7 +32,7 @@ def tambah_item(title, company, location, date):
     save_data(data)
     print("Data berhasil ditambahkan")
 
-# READ (TAMPIL TABEL)
+
 def lihat_semua():
     data = load_data()
 

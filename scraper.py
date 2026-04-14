@@ -33,11 +33,10 @@ async def scrape_and_send():
             data.append(item)
             id_counter += 1
 
-        # simpan ke JSON
+
         with open("data.json", "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
 
-        # kirim ke websocket
         async with websockets.connect("ws://localhost:8765") as websocket:
             for item in data:
                 await websocket.send(json.dumps(item))
