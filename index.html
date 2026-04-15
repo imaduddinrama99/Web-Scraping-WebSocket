@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Data Jobs Scraper</title>
+
+  </head>
+  <body>
+    <h1>Data Jobs (Fake Jobs)</h1>
+
+    <button onclick="loadData()">Load Data</button>
+
+    <table border="1" id="table">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Date</th>
+      </tr>
+    </table>
+
+    <script>
+      const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+      async function loadData() {
+        const response = await fetch('data.json');
+        const data = await response.json();
+
+        let table = document.getElementById('table');
+
+        table.innerHTML = `
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Company</th>
+            <th>Location</th>
+            <th>Date</th>
+        </tr>
+    `;
+
+        for (const item of data) {
+          let row = table.insertRow();
+
+          row.style.opacity = '0';
+          row.style.transition = 'opacity 0.5s ease';
+
+          row.insertCell(0).innerText = item.id;
+          row.insertCell(1).innerText = item.title;
+          row.insertCell(2).innerText = item.company;
+          row.insertCell(3).innerText = item.location;
+          row.insertCell(4).innerText = item.date;
+
+          setTimeout(() => {
+            row.style.opacity = '1';
+          }, 10);
+
+          await sleep(300);
+        }
+      }
+    </script>
+  </body>
+</html>
